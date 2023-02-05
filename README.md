@@ -6,6 +6,6 @@ Adds the following resources:
 - [x] Deployment
 - [x] IngressRoute
 - [x] Middleware
-- [ ] NamOAuthClientApplicationResource
-- [ ] ConfigMap
+- [x] NamOAuthClientApplicationResource
+- [x] ConfigMap
 
