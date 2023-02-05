@@ -1,0 +1,177 @@
+[
+	{
+		"id": 64633350,
+		"name": "sha256:3b3d3ee86ffeb8c9599681618aff64dcc06ace88f4adb0009c73a22241420ef1",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/64633350",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-20T11:32:56Z",
+		"updated_at": "2023-01-20T11:32:56Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/64633350",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": [
+					"sha-5d41ac0"
+				]
+			}
+		}
+	},
+	{
+		"id": 64632092,
+		"name": "sha256:224a5926c72a91d382a4893066cfbd2bdea1c75c8fa61598cc7ee1c51d698e53",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/64632092",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-20T11:27:44Z",
+		"updated_at": "2023-01-20T11:27:44Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/64632092",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": []
+			}
+		}
+	},
+	{
+		"id": 64410646,
+		"name": "sha256:ca3b56380d5e12de8393d4793bca108512092e70e034a3f36c1fb4c00efc1a50",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/64410646",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-19T14:59:25Z",
+		"updated_at": "2023-01-19T14:59:25Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/64410646",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": [
+					"sha-4ede6df"
+				]
+			}
+		}
+	},
+	{
+		"id": 62930338,
+		"name": "sha256:25ba74fbc354788960e267c4010d42f624f7312d85379fa8996945b4feb4be68",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/62930338",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-11T13:44:59Z",
+		"updated_at": "2023-01-11T13:44:59Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/62930338",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": []
+			}
+		}
+	},
+	{
+		"id": 62930224,
+		"name": "sha256:a0a73bf3fbf60d80453f36bbf45311e05a848b60df4f3896903d890b6d722702",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/62930224",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-11T13:44:27Z",
+		"updated_at": "2023-01-11T13:44:27Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/62930224",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": []
+			}
+		}
+	},
+	{
+		"id": 62081169,
+		"name": "sha256:e4db0ec2e3e31b51fb3885caedcf54e2b4d1a40fbc40847ecd964bf29af555aa",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/62081169",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-06T14:17:27Z",
+		"updated_at": "2023-01-06T14:17:27Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/62081169",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": [
+					"sha-acbd646"
+				]
+			}
+		}
+	},
+	{
+		"id": 62079705,
+		"name": "sha256:16ecbc3e173c7f22f07047aed85f8271ee27af536a8888ca88412d964f969c24",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/62079705",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-06T14:07:34Z",
+		"updated_at": "2023-01-06T14:07:34Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/62079705",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": []
+			}
+		}
+	},
+	{
+		"id": 61263289,
+		"name": "sha256:0beaf3b5ca0196e3c1f9fcd4cf16b809c59129d58c988c27aff0ecd77c4305df",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/61263289",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2023-01-02T11:01:40Z",
+		"updated_at": "2023-01-02T11:01:40Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/61263289",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": []
+			}
+		}
+	},
+	{
+		"id": 61103157,
+		"name": "sha256:60297921b4a0df13a58bbbc19c1a8d943d926772ae65ad91b2ce2bdbed9ff0a8",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/61103157",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2022-12-31T09:31:16Z",
+		"updated_at": "2022-12-31T09:31:16Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/61103157",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": []
+			}
+		}
+	},
+	{
+		"id": 60886062,
+		"name": "sha256:f09e786e1c99d3788c74aa463f6516b170eeb61ba476a1cab400f779111410e8",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/60886062",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2022-12-29T10:29:46Z",
+		"updated_at": "2022-12-29T10:29:46Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/60886062",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": [
+					"sha-fb13ade"
+				]
+			}
+		}
+	},
+	{
+		"id": 60885515,
+		"name": "sha256:5c9afc27f6f33f48b132edc02bdd637eae831abf3e72e5ac56a1fd4775f0b606",
+		"url": "https://api.github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/versions/60885515",
+		"package_html_url": "https://github.com/orgs/FINTLabs/packages/container/package/flais-auth-forward-service",
+		"created_at": "2022-12-29T10:24:26Z",
+		"updated_at": "2022-12-29T10:24:26Z",
+		"html_url": "https://github.com/orgs/FINTLabs/packages/container/flais-auth-forward-service/60885515",
+		"metadata": {
+			"package_type": "container",
+			"container": {
+				"tags": [
+					"sha-5cd2c96"
+				]
+			}
+		}
+	}
+]

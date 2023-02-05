@@ -20,7 +20,6 @@ public class Transformer {
         this.gitHubPackageVersionService = gitHubPackageVersionService;
     }
 
-
     public InputStream transform(SsoCrd crd, String manifestFile) throws IOException {
 
         InputStream inputStream = new ClassPathResource(manifestFile).getInputStream();
@@ -33,16 +32,14 @@ public class Transformer {
         return new ByteArrayInputStream(stringWriter.toString().getBytes());
     }
 
-    private Map<String, String> getContext(SsoCrd crd) {
+    public Map<String, String> getContext(SsoCrd crd) {
         Map<String, String> context = new HashMap<>();
 
         context.put("name", crd.getMetadata().getName());
         context.put("namespace", crd.getMetadata().getNamespace());
-        //context.put("environment", environment);
         context.put("hostname", crd.getSpec().getHostname());
         context.put("basePath", crd.getSpec().getBasePath());
         context.put("image", gitHubPackageVersionService.getLatest());
-        //context.put("orgId", crd.getMetadata().getLabels().get("fintlabs.no/org-id").replace(".", "-"));
 
         return context;
     }
