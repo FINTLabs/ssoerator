@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ name }}
+  namespace: {{ namespace }}
+spec:
+  forwardAuth:
+    address: http://{{ name }}:8080/_oauth
+    authResponseHeaders:
+      - Authorization
+    trustForwardHeader: true

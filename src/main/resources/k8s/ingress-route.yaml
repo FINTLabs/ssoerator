@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ name }}
+  namespace: {{ namespace }}
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`{{ hostname }}`) && PathPrefix(`{{ basePath }}/_oauth`)
+      kind: Rule
+      services:
+        - name: {{ name }}
+          port: 8080
