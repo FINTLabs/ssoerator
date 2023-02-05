@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IngressRouteSpec {
     private List<String> entryPoints = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
 
     @Data
-    //@JsonIgnoreProperties(ignoreUnknown = true)
-
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Route {
         private String match;
         private String kind;
@@ -25,8 +24,7 @@ public class IngressRouteSpec {
     }
 
     @Data
-    //@JsonIgnoreProperties(ignoreUnknown = true)
-
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Service {
         private String name;
         private long port;

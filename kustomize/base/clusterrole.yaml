@@ -3,8 +3,14 @@ kind: ClusterRole
 metadata:
   name: ssoerator
 rules:
-  - apiGroups: [""]
-    resources: ["secrets"]
+  - apiGroups:
+      - ""
+      - "apps"
+    resources:
+      - secrets
+      - configmaps
+      - deployments
+      - services
     verbs: 
       - create
       - delete
@@ -22,6 +28,7 @@ rules:
       - list
   - apiGroups:
       - fintlabs.no
+      - traefik.containo.us
     resources:
       - "*"
 #      - namoauthclientapplicationresources
