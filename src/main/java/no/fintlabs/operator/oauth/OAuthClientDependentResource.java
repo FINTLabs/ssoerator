@@ -49,8 +49,9 @@ public class OAuthClientDependentResource extends FlaisKubernetesDependentResour
                     Collections.singletonList(
                             UriComponentsBuilder
                                     .newInstance()
+                                    .scheme("https")
                                     .host(primary.getSpec().getHostname())
-                                    .path(primary.getSpec().getBasePath())
+                                    .pathSegment(primary.getSpec().getBasePath(), "_oauth")
                                     .build()
                                     .toUriString()
                     )
