@@ -8,13 +8,14 @@ import io.javaoperatorsdk.operator.api.reconciler.Context;
 import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
-import no.fintlabs.operator.LabelFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Collections;
 
 import static no.fintlabs.operator.LabelFactory.updateRecommendedLabels;
 
@@ -38,6 +39,22 @@ public class OAuthClientDependentResource extends FlaisKubernetesDependentResour
             oAuthClientCrd.getMetadata().setNamespace(primary.getMetadata().getNamespace());
             oAuthClientCrd.getMetadata().setName(primary.getMetadata().getName());
             updateRecommendedLabels(oAuthClientCrd, primary);
+
+
+            UriComponents build = UriComponentsBuilder.newInstance()
+                    .host(primary.getSpec().getHostname()).path(primary.getSpec().getBasePath()).build();
+
+
+            oAuthClientCrd.getSpec().setRedirectUris(
+                    Collections.singletonList(
+                            UriComponentsBuilder
+                                    .newInstance()
+                                    .host(primary.getSpec().getHostname())
+                                    .path(primary.getSpec().getBasePath())
+                                    .build()
+                                    .toUriString()
+                    )
+            );
 
             return oAuthClientCrd;
         } catch (IOException e) {
