@@ -2,7 +2,6 @@ apiVersion: fintlabs.no/v1alpha1
 kind: FLAISSso
 metadata:
   name: sample-sso
-  namespace: default
   labels:
     app.kubernetes.io/name: sample-sso
     app.kubernetes.io/instance: sample-sso_fintlabs-no

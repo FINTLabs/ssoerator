@@ -10,6 +10,12 @@ import io.fabric8.kubernetes.model.annotation.Version;
 @Version("v1alpha1")
 @Kind("NamOAuthClientApplicationResource")
 public class OAuthClientCrd extends CustomResource<OAuthClientSpec, OAuthClientStatus> implements Namespaced {
+
+    @Override
+    protected OAuthClientSpec initSpec() {
+        return new OAuthClientSpec();
+    }
+
     @Override
     protected OAuthClientStatus initStatus() {
         return new OAuthClientStatus();
