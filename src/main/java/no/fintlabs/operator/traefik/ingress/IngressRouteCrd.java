@@ -5,7 +5,6 @@ import io.fabric8.kubernetes.client.CustomResource;
 import io.fabric8.kubernetes.model.annotation.Group;
 import io.fabric8.kubernetes.model.annotation.Kind;
 import io.fabric8.kubernetes.model.annotation.Version;
-import no.fintlabs.operator.traefik.middleware.AuthForwardMiddlewareSpec;
 
 @Group("traefik.containo.us")
 @Version("v1alpha1")
