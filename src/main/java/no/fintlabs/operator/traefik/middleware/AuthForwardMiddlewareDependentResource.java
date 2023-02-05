@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
+import no.fintlabs.operator.LabelFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,7 @@ public class AuthForwardMiddlewareDependentResource extends FlaisKubernetesDepen
             middleware.getMetadata().setNamespace(primary.getMetadata().getNamespace());
             log.info("Desired middleware:");
             log.info(middleware.toString());
+            LabelFactory.updateRecommendedLabels(middleware, primary);
 
             return middleware;
         } catch (IOException e) {

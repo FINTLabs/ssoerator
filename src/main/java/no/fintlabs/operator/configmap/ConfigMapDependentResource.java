@@ -6,12 +6,15 @@ import io.javaoperatorsdk.operator.api.reconciler.Context;
 import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
+import no.fintlabs.operator.LabelFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
+
+import static no.fintlabs.operator.LabelFactory.updateRecommendedLabels;
 
 @Component
 public class ConfigMapDependentResource extends FlaisKubernetesDependentResource<ConfigMap, SsoCrd, SsoSpec> {
@@ -26,14 +29,11 @@ public class ConfigMapDependentResource extends FlaisKubernetesDependentResource
     @Override
     protected ConfigMap desired(SsoCrd primary, Context<SsoCrd> context) {
         try {
-            HashMap<String, String> labels = new HashMap<>(primary.getMetadata().getLabels());
-
-            labels.put("app.kubernetes.io/managed-by", "ssoerator");
-
             ConfigMap configMap = getKubernetesClient()
                     .configMaps()
                     .load(transformer.transform(primary, "k8s/config-map.yaml"))
                     .get();
+            updateRecommendedLabels(configMap, primary);
 
             return configMap;
 

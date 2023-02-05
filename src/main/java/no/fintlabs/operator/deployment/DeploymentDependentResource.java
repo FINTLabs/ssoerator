@@ -11,6 +11,7 @@ import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
 import no.fintlabs.github.GitHubPackageVersionService;
+import no.fintlabs.operator.LabelFactory;
 import no.fintlabs.operator.MetadataFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -37,9 +39,9 @@ public class DeploymentDependentResource extends FlaisKubernetesDependentResourc
     @Override
     protected Deployment desired(SsoCrd resource, Context<SsoCrd> context) {
         try {
-            HashMap<String, String> labels = new HashMap<>(resource.getMetadata().getLabels());
+            //HashMap<String, String> labels = new HashMap<>(resource.getMetadata().getLabels());
 
-            labels.put("app.kubernetes.io/managed-by", "ssoerator");
+            //labels.put("app.kubernetes.io/managed-by", "ssoerator");
 
             Deployment deployment = getKubernetesClient()
                     .apps()
@@ -47,7 +49,8 @@ public class DeploymentDependentResource extends FlaisKubernetesDependentResourc
                     .load(transformer.transform(resource, "k8s/deployment.yaml"))
                     .get();
 
-            deployment.getMetadata().getLabels().putAll(labels);
+            //deployment.getMetadata().getLabels().putAll(labels);
+            Map<String, String> labels = LabelFactory.updateRecommendedLabels(deployment, resource);
             deployment.getSpec().setSelector(new LabelSelectorBuilder().withMatchLabels(labels).build());
             deployment.getSpec().getTemplate().setMetadata(new ObjectMetaBuilder().withLabels(labels).build());
 

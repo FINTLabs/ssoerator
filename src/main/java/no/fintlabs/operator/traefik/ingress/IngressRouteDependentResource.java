@@ -8,6 +8,7 @@ import io.javaoperatorsdk.operator.api.reconciler.Context;
 import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
+import no.fintlabs.operator.LabelFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
@@ -33,13 +34,14 @@ public class IngressRouteDependentResource extends FlaisKubernetesDependentResou
 
             IngressRouteCrd ingressRouteCrd = client.load(transformer.transform(primary, "k8s/ingress-route.yaml")).get();
 
-            HashMap<String, String> labels = new HashMap<>(primary.getMetadata().getLabels());
-
-            labels.put("app.kubernetes.io/managed-by", "ssoerator");
+//            HashMap<String, String> labels = new HashMap<>(primary.getMetadata().getLabels());
+//
+//            labels.put("app.kubernetes.io/managed-by", "ssoerator");
 
             ingressRouteCrd.getMetadata().setNamespace(primary.getMetadata().getNamespace());
             ingressRouteCrd.getMetadata().setName(primary.getMetadata().getName());
-            ingressRouteCrd.getMetadata().setLabels(labels);
+            LabelFactory.updateRecommendedLabels(ingressRouteCrd, primary);
+            //ingressRouteCrd.getMetadata().setLabels(labels);
 
             return ingressRouteCrd;
         } catch (IOException e) {
