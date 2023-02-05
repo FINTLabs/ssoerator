@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.HashMap;
 
+import static no.fintlabs.operator.LabelFactory.updateRecommendedLabels;
+
 @Component
 public class OAuthClientDependentResource extends FlaisKubernetesDependentResource<OAuthClientCrd, SsoCrd, SsoSpec> {
 
@@ -33,14 +35,9 @@ public class OAuthClientDependentResource extends FlaisKubernetesDependentResour
 
             OAuthClientCrd oAuthClientCrd = client.load(transformer.transform(primary, "k8s/oauthclient.yaml")).get();
 
-            //HashMap<String, String> labels = new HashMap<>(primary.getMetadata().getLabels());
-
-            //labels.put("app.kubernetes.io/managed-by", "ssoerator");
-
             oAuthClientCrd.getMetadata().setNamespace(primary.getMetadata().getNamespace());
             oAuthClientCrd.getMetadata().setName(primary.getMetadata().getName());
-            //oAuthClientCrd.getMetadata().setLabels(labels);
-            LabelFactory.updateRecommendedLabels(oAuthClientCrd, primary);
+            updateRecommendedLabels(oAuthClientCrd, primary);
 
             return oAuthClientCrd;
         } catch (IOException e) {

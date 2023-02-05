@@ -14,7 +14,6 @@ import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 @Component
 public class IngressRouteDependentResource extends FlaisKubernetesDependentResource<IngressRouteCrd, SsoCrd, SsoSpec> {
@@ -30,18 +29,15 @@ public class IngressRouteDependentResource extends FlaisKubernetesDependentResou
     protected IngressRouteCrd desired(SsoCrd primary, Context<SsoCrd> context) {
 
         try {
-            MixedOperation<IngressRouteCrd, KubernetesResourceList<IngressRouteCrd>, Resource<IngressRouteCrd>> client = getKubernetesClient().resources(IngressRouteCrd.class);
-
-            IngressRouteCrd ingressRouteCrd = client.load(transformer.transform(primary, "k8s/ingress-route.yaml")).get();
-
-//            HashMap<String, String> labels = new HashMap<>(primary.getMetadata().getLabels());
-//
-//            labels.put("app.kubernetes.io/managed-by", "ssoerator");
+            MixedOperation<IngressRouteCrd, KubernetesResourceList<IngressRouteCrd>, Resource<IngressRouteCrd>> client
+                    = getKubernetesClient().resources(IngressRouteCrd.class);
+            IngressRouteCrd ingressRouteCrd = client
+                    .load(transformer.transform(primary, "k8s/ingress-route.yaml"))
+                    .get();
 
             ingressRouteCrd.getMetadata().setNamespace(primary.getMetadata().getNamespace());
             ingressRouteCrd.getMetadata().setName(primary.getMetadata().getName());
             LabelFactory.updateRecommendedLabels(ingressRouteCrd, primary);
-            //ingressRouteCrd.getMetadata().setLabels(labels);
 
             return ingressRouteCrd;
         } catch (IOException e) {

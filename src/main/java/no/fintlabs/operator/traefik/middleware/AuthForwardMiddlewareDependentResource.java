@@ -33,7 +33,8 @@ public class AuthForwardMiddlewareDependentResource extends FlaisKubernetesDepen
     protected AuthForwardMiddlewareCrd desired(SsoCrd primary, Context<SsoCrd> context) {
 
         try {
-            MixedOperation<AuthForwardMiddlewareCrd, KubernetesResourceList<AuthForwardMiddlewareCrd>, Resource<AuthForwardMiddlewareCrd>> resources = getKubernetesClient().resources(AuthForwardMiddlewareCrd.class);
+            MixedOperation<AuthForwardMiddlewareCrd, KubernetesResourceList<AuthForwardMiddlewareCrd>, Resource<AuthForwardMiddlewareCrd>> resources
+                    = getKubernetesClient().resources(AuthForwardMiddlewareCrd.class);
 
             AuthForwardMiddlewareCrd middleware = resources
                     .load(transformer.transform(primary, "k8s/middleware.yaml"))

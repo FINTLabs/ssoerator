@@ -6,13 +6,11 @@ import io.javaoperatorsdk.operator.api.reconciler.Context;
 import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
-import no.fintlabs.operator.LabelFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import static no.fintlabs.operator.LabelFactory.updateRecommendedLabels;
 
