@@ -11,7 +11,6 @@ import no.fintlabs.Transformer;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
@@ -40,20 +39,17 @@ public class OAuthClientDependentResource extends FlaisKubernetesDependentResour
             oAuthClientCrd.getMetadata().setName(primary.getMetadata().getName());
             updateRecommendedLabels(oAuthClientCrd, primary);
 
-
-            UriComponents build = UriComponentsBuilder.newInstance()
-                    .host(primary.getSpec().getHostname()).path(primary.getSpec().getBasePath()).build();
-
-
             oAuthClientCrd.getSpec().setRedirectUris(
                     Collections.singletonList(
                             UriComponentsBuilder
                                     .newInstance()
                                     .scheme("https")
                                     .host(primary.getSpec().getHostname())
-                                    .pathSegment(primary.getSpec().getBasePath(), "_oauth")
-                                    .build()
-                                    .toUriString()
+                                    .path(primary.getSpec().getBasePath())
+                                    .build("_oauth")
+                                    .toURL()
+                                    .toString()
+
                     )
             );
 
