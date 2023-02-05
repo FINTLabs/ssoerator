@@ -14,9 +14,6 @@ import java.util.Map;
 @Component
 public class Transformer {
 
-//    @Value("${fint.operator.environment:alpha}")
-//    private String environment;
-
     private final GitHubPackageVersionService gitHubPackageVersionService;
 
     public Transformer(GitHubPackageVersionService gitHubPackageVersionService) {
