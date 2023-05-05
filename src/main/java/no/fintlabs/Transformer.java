@@ -24,7 +24,8 @@ public class Transformer {
 
         InputStream inputStream = new ClassPathResource(manifestFile).getInputStream();
 
-        Template compile = Mustache.compiler().compile(new BufferedReader(new InputStreamReader(inputStream)));
+        Template compile = 
+                Mustache.compiler().compile(new BufferedReader(new InputStreamReader(inputStream)));
 
         StringWriter stringWriter = new StringWriter();
         compile.execute(getContext(crd), stringWriter);

@@ -10,7 +10,6 @@ import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
 import no.fintlabs.operator.LabelFactory;
-import no.fintlabs.operator.MetadataFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
@@ -22,14 +21,11 @@ import java.util.Map;
 @Component
 public class DeploymentDependentResource extends FlaisKubernetesDependentResource<Deployment, SsoCrd, SsoSpec> {
 
-    private final MetadataFactory metadataFactory;
-
     private final Transformer transformer;
 
 
-    public DeploymentDependentResource(FlaisWorkflow<SsoCrd, SsoSpec> workflow, KubernetesClient kubernetesClient, MetadataFactory metadataFactory, Transformer transformer) {
+    public DeploymentDependentResource(FlaisWorkflow<SsoCrd, SsoSpec> workflow, KubernetesClient kubernetesClient, Transformer transformer) {
         super(Deployment.class, workflow, kubernetesClient);
-        this.metadataFactory = metadataFactory;
         this.transformer = transformer;
     }
 
@@ -43,7 +39,7 @@ public class DeploymentDependentResource extends FlaisKubernetesDependentResourc
                     .get();
 
             Map<String, String> labels = LabelFactory.updateRecommendedLabels(deployment, resource);
-            deployment.getSpec().setSelector(new LabelSelectorBuilder().withMatchLabels(labels).build());
+            deployment.getSpec().setSelector(new LabelSelectorBuilder().withMatchLabels(LabelFactory.matchingLabels(resource)).build());
             deployment.getSpec().getTemplate().setMetadata(new ObjectMetaBuilder().withLabels(labels).build());
 
             return deployment;

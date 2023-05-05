@@ -6,13 +6,12 @@ import io.javaoperatorsdk.operator.api.reconciler.Context;
 import no.fintlabs.FlaisKubernetesDependentResource;
 import no.fintlabs.FlaisWorkflow;
 import no.fintlabs.Transformer;
+import no.fintlabs.operator.LabelFactory;
 import no.fintlabs.operator.SsoCrd;
 import no.fintlabs.operator.SsoSpec;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
-import static no.fintlabs.operator.LabelFactory.updateRecommendedLabels;
 
 @Component
 public class ServiceDependentResource extends FlaisKubernetesDependentResource<Service, SsoCrd, SsoSpec> {
@@ -32,7 +31,7 @@ public class ServiceDependentResource extends FlaisKubernetesDependentResource<S
                     .load(transformer.transform(primary, "k8s/service.yaml"))
                     .get();
 
-            service.getSpec().setSelector(updateRecommendedLabels(service, primary));
+            service.getSpec().setSelector(LabelFactory.matchingLabels(service));
 
             return service;
 
