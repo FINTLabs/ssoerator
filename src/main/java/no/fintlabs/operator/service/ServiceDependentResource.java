@@ -31,7 +31,7 @@ public class ServiceDependentResource extends FlaisKubernetesDependentResource<S
                     .load(transformer.transform(primary, "k8s/service.yaml"))
                     .get();
 
-            service.getSpec().setSelector(LabelFactory.matchingLabels(service));
+            service.getSpec().setSelector(LabelFactory.matchingLabels(primary));
 
             return service;
 
