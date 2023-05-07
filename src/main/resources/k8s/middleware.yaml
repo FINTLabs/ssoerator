@@ -5,7 +5,7 @@ metadata:
   namespace: {{ namespace }}
 spec:
   forwardAuth:
-    address: http://{{ name }}:8080{{ basePath }}/_oauth
+    address: http://{{ name }}.{{ namespace }}:8080{{ basePath }}/_oauth
     authResponseHeaders:
       - Authorization
     trustForwardHeader: true
