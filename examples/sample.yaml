@@ -14,3 +14,4 @@ metadata:
 spec:
   hostname: test.flais.io
   basePath: /alpha/fintlabs-no
+  loggingLevel: debug

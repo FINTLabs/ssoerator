@@ -13,6 +13,15 @@ patches:
       kind: Deployment
       name: ssoerator
   - patch: |-
+      - op: add
+        path: "/spec/template/spec/containers/0/env/-"
+        value:
+          name: flais.operators.ssoerator.test-environment
+          value: true
+    target:
+      kind: Deployment
+      name: ssoerator
+  - patch: |-
       - op: replace
         path: "/spec/itemPath"
         value: "vaults/aks-alpha-vault/items/ssoerator"

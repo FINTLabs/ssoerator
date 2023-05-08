@@ -21,6 +21,8 @@ spec:
                 type: string
               hostname:
                 type: string
+              loggingLevel:
+                type: string
             type: object
           status:
             properties:

@@ -2,8 +2,8 @@ package no.fintlabs;
 
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
-import no.fintlabs.github.GitHubPackageVersionService;
 import no.fintlabs.operator.SsoCrd;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +14,15 @@ import java.util.Map;
 @Component
 public class Transformer {
 
-    private final GitHubPackageVersionService gitHubPackageVersionService;
 
-    public Transformer(GitHubPackageVersionService gitHubPackageVersionService) {
-        this.gitHubPackageVersionService = gitHubPackageVersionService;
-    }
+    @Value("${flais.operators.ssoerator.test-environment:false}")
+    private boolean testEnvironment;
 
     public InputStream transform(SsoCrd crd, String manifestFile) throws IOException {
 
         InputStream inputStream = new ClassPathResource(manifestFile).getInputStream();
 
-        Template compile = 
+        Template compile =
                 Mustache.compiler().compile(new BufferedReader(new InputStreamReader(inputStream)));
 
         StringWriter stringWriter = new StringWriter();
@@ -40,7 +38,11 @@ public class Transformer {
         context.put("namespace", crd.getMetadata().getNamespace());
         context.put("hostname", crd.getSpec().getHostname());
         context.put("basePath", crd.getSpec().getBasePath());
-        context.put("image", gitHubPackageVersionService.getLatest());
+        context.put("image", "ghcr.io/fintlabs/flais-auth-forward-service:latest");
+        context.put("loggingLevel", crd.getSpec().getLoggingLevel());
+        context.put("issuerUri", testEnvironment
+                ? "https://idp.test.felleskomponent.no/nidp/oauth/nam"
+                : "https://idp.felleskomponent.no/nidp/oauth/nam");
 
         return context;
     }

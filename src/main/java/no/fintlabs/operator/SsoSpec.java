@@ -7,4 +7,5 @@ import no.fintlabs.FlaisSpec;
 public class SsoSpec implements FlaisSpec {
     private String basePath;
     private String hostname;
+    private String loggingLevel = "info";
 }

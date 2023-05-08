@@ -3,42 +3,16 @@ package no.fintlabs
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import io.fabric8.kubernetes.api.model.apps.Deployment
-import no.fintlabs.github.GitHubPackageVersionService
 import no.fintlabs.operator.SsoCrd
 import no.fintlabs.operator.SsoSpec
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
-import org.springframework.core.io.ClassPathResource
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
-import org.springframework.web.reactive.function.client.WebClient
 import spock.lang.Specification
 
 class TransformerSpec extends Specification {
 
-    MockWebServer mockWebServer
-    WebClient webClient
-    def githubResponse = new ClassPathResource('github-response.json').getFile().text
-    GitHubPackageVersionService gitHubPackageVersionService
     Transformer transformer
 
     void setup() {
-        mockWebServer = new MockWebServer()
-        mockWebServer.start(8080)
-
-        webClient = WebClient.builder().baseUrl(mockWebServer.hostName + ":" + mockWebServer.port + "/").build()
-
-        gitHubPackageVersionService = new GitHubPackageVersionService(webClient)
-        mockWebServer.enqueue(new MockResponse().setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .setBody(githubResponse))
-        gitHubPackageVersionService.init()
-
-        transformer = new Transformer(gitHubPackageVersionService)
-
-    }
-
-    void cleanup() {
-        mockWebServer.shutdown()
+        transformer = new Transformer()
     }
 
     def "When creating context form crd the values in the context should be equal to the corresponding values in the crd"() {
@@ -64,7 +38,7 @@ class TransformerSpec extends Specification {
         context.containsKey("basePath")
         context.get("basePath") == crd.getSpec().getBasePath()
         context.containsKey("image")
-        context.get("image") == gitHubPackageVersionService.getLatest()
+        context.get("image") == "ghcr.io/fintlabs/flais-auth-forward-service:latest"
     }
 
     def "When transforming a manifest file it should correspond with the values from the crd"() {
@@ -85,7 +59,7 @@ class TransformerSpec extends Specification {
 
         then:
         deployment.getMetadata().getName() == crd.getMetadata().getName()
-        deployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage() == gitHubPackageVersionService.getLatest()
+        deployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage() == "ghcr.io/fintlabs/flais-auth-forward-service:latest"
 
     }
 }
