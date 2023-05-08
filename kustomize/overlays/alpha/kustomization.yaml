@@ -17,7 +17,7 @@ patches:
         path: "/spec/template/spec/containers/0/env/-"
         value:
           name: flais.operators.ssoerator.test-environment
-          value: true
+          value: "true"
     target:
       kind: Deployment
       name: ssoerator
