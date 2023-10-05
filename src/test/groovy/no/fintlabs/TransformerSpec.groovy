@@ -62,4 +62,16 @@ class TransformerSpec extends Specification {
         deployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage() == "ghcr.io/fintlabs/flais-auth-forward-service:latest"
 
     }
+
+    def "BasePath should not end with a slash"() {
+        given:
+        def spec = new SsoSpec()
+
+        when:
+        spec.setBasePath("some/base/path//")
+
+        then:
+        spec.getBasePath() == "some/base/path"
+    }
+
 }
