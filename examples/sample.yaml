@@ -1,11 +1,11 @@
 apiVersion: fintlabs.no/v1alpha1
 kind: FLAISSso
 metadata:
-  name: sample-sso
+  name: test-sso
   namespace: test
   labels:
-    app.kubernetes.io/name: sample-sso
-    app.kubernetes.io/instance: sample-sso_fintlabs-no
+    app.kubernetes.io/name: test-sso
+    app.kubernetes.io/instance: test-sso_fintlabs-no
     app.kubernetes.io/version: latest
     app.kubernetes.io/component: sso
     app.kubernetes.io/part-of: sso
@@ -15,3 +15,4 @@ spec:
   hostname: test.flais.io
   basePath: /alpha/fintlabs-no
   loggingLevel: debug
+  upnClaim: upn

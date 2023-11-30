@@ -23,6 +23,8 @@ spec:
                 type: string
               loggingLevel:
                 type: string
+              upnClaim:
+                type: string
             type: object
           status:
             properties:

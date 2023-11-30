@@ -38,6 +38,7 @@ public class Transformer {
         context.put("namespace", crd.getMetadata().getNamespace());
         context.put("hostname", crd.getSpec().getHostname());
         context.put("basePath", crd.getSpec().getBasePath());
+        context.put("upnClaim", crd.getSpec().getUpnClaim());
         context.put("image", "ghcr.io/fintlabs/flais-auth-forward-service:latest");
         context.put("loggingLevel", crd.getSpec().getLoggingLevel());
         context.put("issuerUri", testEnvironment
