@@ -7,3 +7,4 @@ data:
   spring.webflux.base-path: {{ basePath }}
   fint.sso.issuer-uri: {{ issuerUri}}
   logging.level.no.fintlabs: {{ loggingLevel }}
+  fint.sso.claim-for-upn: {{ upnClaim }}
