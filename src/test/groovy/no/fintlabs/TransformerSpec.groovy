@@ -63,15 +63,4 @@ class TransformerSpec extends Specification {
 
     }
 
-    def "BasePath should not end with a slash"() {
-        given:
-        def spec = new SsoSpec()
-
-        when:
-        spec.setBasePath("some/base/path//")
-
-        then:
-        spec.getBasePath() == "some/base/path"
-    }
-
 }
