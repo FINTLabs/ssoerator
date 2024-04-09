@@ -22,8 +22,7 @@ public class Transformer {
 
         InputStream inputStream = new ClassPathResource(manifestFile).getInputStream();
 
-        Template compile =
-                Mustache.compiler().compile(new BufferedReader(new InputStreamReader(inputStream)));
+        Template compile = Mustache.compiler().compile(new BufferedReader(new InputStreamReader(inputStream)));
 
         StringWriter stringWriter = new StringWriter();
         compile.execute(getContext(crd), stringWriter);
@@ -38,6 +37,7 @@ public class Transformer {
         context.put("namespace", crd.getMetadata().getNamespace());
         context.put("hostname", crd.getSpec().getHostname());
         context.put("basePath", crd.getSpec().getBasePath());
+        context.put("oauthPath", crd.getSpec().getBasePath().endsWith("/") ? "_oauth" : "/_oauth");
         context.put("upnClaim", crd.getSpec().getUpnClaim());
         context.put("image", "ghcr.io/fintlabs/flais-auth-forward-service:latest");
         context.put("loggingLevel", crd.getSpec().getLoggingLevel());
