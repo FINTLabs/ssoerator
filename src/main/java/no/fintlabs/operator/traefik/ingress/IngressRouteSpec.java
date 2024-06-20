@@ -29,11 +29,13 @@ public class IngressRouteSpec {
         private String name;
         private long port;
         private String kind;
+        private String namespace;
     }
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Middleware {
         private String name;
-
+        private String namespace;
     }
 }
