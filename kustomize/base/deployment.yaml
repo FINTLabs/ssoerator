@@ -4,6 +4,9 @@ metadata:
   name: ssoerator
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ssoerator
   template:
     metadata:
       annotations:
@@ -21,7 +24,7 @@ spec:
         - name: ssoerator
           securityContext:
             {}
-          image: "ghcr.io/fintlabs/ssoerator:sha-0000000"
+          image: "ghcr.io/fintlabs/ssoerator:sha-000000"
           imagePullPolicy: IfNotPresent
           env:
             - name: logging.level.no.fintlabs
