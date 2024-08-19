@@ -21,3 +21,10 @@ spec:
                 name: {{ name }}
             - secretRef:
                 name: {{ name }}
+          resources:
+            requests:
+              memory: "550Mi"
+              cpu: "50m"
+            limits:
+              memory: "650Mi"
+              cpu: "100m"
