@@ -21,10 +21,13 @@ spec:
                 name: {{ name }}
             - secretRef:
                 name: {{ name }}
+          env:
+            - name: JAVA_OPTS
+              value: "-Xmx512m -Xms300m"
           resources:
             requests:
-              memory: "550Mi"
+              memory: "450Mi"
               cpu: "50m"
             limits:
-              memory: "650Mi"
+              memory: "550Mi"
               cpu: "100m"
