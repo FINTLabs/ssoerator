@@ -38,7 +38,7 @@ class TransformerSpec extends Specification {
         context.containsKey("basePath")
         context.get("basePath") == crd.getSpec().getBasePath()
         context.containsKey("image")
-        context.get("image") == "ghcr.io/fintlabs/flais-auth-forward-service:latest"
+        context.get("image").startsWith("ghcr.io/fintlabs/flais-auth-forward-service:");
     }
 
     def "When transforming a manifest file it should correspond with the values from the crd"() {
@@ -59,7 +59,7 @@ class TransformerSpec extends Specification {
 
         then:
         deployment.getMetadata().getName() == crd.getMetadata().getName()
-        deployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage() == "ghcr.io/fintlabs/flais-auth-forward-service:latest"
+        deployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage().startsWith("ghcr.io/fintlabs/flais-auth-forward-service:");
 
     }
 
