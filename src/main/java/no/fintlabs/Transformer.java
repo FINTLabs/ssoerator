@@ -39,7 +39,7 @@ public class Transformer {
         context.put("basePath", crd.getSpec().getBasePath());
         context.put("oauthPath", crd.getSpec().getBasePath().endsWith("/") ? "_oauth" : "/_oauth");
         context.put("upnClaim", crd.getSpec().getUpnClaim());
-        context.put("image", "ghcr.io/fintlabs/flais-auth-forward-service:sha-572cb0d");
+        context.put("image", "ghcr.io/fintlabs/flais-auth-forward-service:sha-baec8dd");
         context.put("loggingLevel", crd.getSpec().getLoggingLevel());
         context.put("issuerUri", testEnvironment
                 ? "https://idp.test.felleskomponent.no/nidp/oauth/nam"
