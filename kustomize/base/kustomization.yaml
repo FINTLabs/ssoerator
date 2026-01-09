@@ -11,8 +11,8 @@ resources:
   - rolebinding.yaml
   - flaisssoes.fintlabs.no-v1.yml
 commonLabels:
-  app.kubernetes.io/name: kafkarator
-  app.kubernetes.io/instance: flais-kafkarator
+  app.kubernetes.io/name: ssoerator
+  app.kubernetes.io/instance: flais-ssoerator
   app.kubernetes.io/version: "latest"
   app.kubernetes.io/managed-by: GA
   app.kubernetes.io/component: operator
