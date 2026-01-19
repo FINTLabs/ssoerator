@@ -13,6 +13,7 @@ class TransformerSpec extends Specification {
 
     void setup() {
         transformer = new Transformer()
+        transformer.@middlewareImage = "test-image"
     }
 
     def "When creating context form crd the values in the context should be equal to the corresponding values in the crd"() {
@@ -38,7 +39,7 @@ class TransformerSpec extends Specification {
         context.containsKey("basePath")
         context.get("basePath") == crd.getSpec().getBasePath()
         context.containsKey("image")
-        context.get("image").startsWith("ghcr.io/fintlabs/flais-auth-forward-service:");
+        context.get("image").startsWith("test-image");
     }
 
     def "When transforming a manifest file it should correspond with the values from the crd"() {
@@ -59,7 +60,7 @@ class TransformerSpec extends Specification {
 
         then:
         deployment.getMetadata().getName() == crd.getMetadata().getName()
-        deployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage().startsWith("ghcr.io/fintlabs/flais-auth-forward-service:");
+        deployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage().startsWith("test-image");
 
     }
 
