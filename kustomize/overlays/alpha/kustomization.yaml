@@ -9,15 +9,16 @@ patches:
         value:  
           name: fint.operator.environment
           value: alpha
-    target:
-      kind: Deployment
-      name: ssoerator
-  - patch: |-
       - op: add
         path: "/spec/template/spec/containers/0/env/-"
         value:
           name: flais.operators.ssoerator.test-environment
           value: "true"
+      - op: add
+        path: "/spec/template/spec/containers/0/env/-"
+        value:
+          name: flais.operators.ssoerator.middleware-image
+          value: ghcr.io/fintlabs/flais-auth-forward-service:sha-ee1db52
     target:
       kind: Deployment
       name: ssoerator
