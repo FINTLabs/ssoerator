@@ -23,6 +23,9 @@ serviceAccount:
   annotations: {}
   name: ""
 
+rbac:
+  create: true
+
 podAnnotations:
   prometheus.io/path: /actuator/prometheus
   prometheus.io/port: "8080"
@@ -38,7 +41,7 @@ service:
   targetPort: http
 
 onePassword:
-  enabled: true
+  enabled: false
   itemPath: ""
 
 secret:
