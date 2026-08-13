@@ -29,6 +29,7 @@ rules:
   - apiGroups:
       - fintlabs.no
       - traefik.containo.us
+      - traefik.io
     resources:
       - "*"
 #      - namoauthclientapplicationresources

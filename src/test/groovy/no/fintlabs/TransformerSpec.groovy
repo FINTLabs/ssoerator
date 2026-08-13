@@ -64,4 +64,27 @@ class TransformerSpec extends Specification {
 
     }
 
+    def "When transforming Traefik manifests they should use v2 and v3 api groups"() {
+        given:
+        def crd = new SsoCrd()
+        def spec = new SsoSpec()
+        crd.getMetadata().setName("test")
+        crd.getMetadata().setNamespace("test")
+        spec.setBasePath("basePath")
+        spec.setHostname("hostname")
+        crd.setSpec(spec)
+
+        when:
+        def ingressRouteV2 = transformer.transform(crd, "k8s/ingress-route.yaml").text
+        def middlewareV2 = transformer.transform(crd, "k8s/middleware.yaml").text
+        def ingressRouteV3 = transformer.transform(crd, "k8s/ingress-route-v3.yaml").text
+        def middlewareV3 = transformer.transform(crd, "k8s/middleware-v3.yaml").text
+
+        then:
+        ingressRouteV2.contains("apiVersion: traefik.containo.us/v1alpha1")
+        middlewareV2.contains("apiVersion: traefik.containo.us/v1alpha1")
+        ingressRouteV3.contains("apiVersion: traefik.io/v1alpha1")
+        middlewareV3.contains("apiVersion: traefik.io/v1alpha1")
+    }
+
 }
