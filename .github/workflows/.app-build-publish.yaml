@@ -1,0 +1,72 @@
+name: App Build
+
+on:
+  workflow_call:
+    outputs:
+      version:
+        description: Docker image tag version
+        value: ${{ jobs.meta.outputs.version }}
+
+jobs:
+  meta:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - id: commit-hash
+        uses: prompt/actions-commit-hash@v4
+
+      - id: version
+        run: echo "version=$(date +'%Y%m%d')-${{ steps.commit-hash.outputs.short }}" >> "$GITHUB_OUTPUT"
+
+  build-and-publish:
+    name: Build & Publish Docker
+    needs: meta
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6.3.0
+
+      - name: Gradle test and build
+        run: ./gradlew build
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: docker-meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha
+            type=raw,value=${{ needs.meta.outputs.version }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v7
+        id: docker-build-push
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.docker-meta.outputs.tags }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
+
+      - name: Print docker tag
+        run: echo 'Docker tag is ${{ steps.docker-meta.outputs.tags }}' >> "$GITHUB_STEP_SUMMARY"

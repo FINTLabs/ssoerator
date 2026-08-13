@@ -1,17 +1,19 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: ssoerator
+  name: {{ include "ssoerator.fullname" . }}
+  labels:
+    {{- include "ssoerator.labels" . | nindent 4 }}
 rules:
   - apiGroups:
       - ""
-      - "apps"
+      - apps
     resources:
       - secrets
       - configmaps
       - deployments
       - services
-    verbs: 
+    verbs:
       - create
       - delete
       - get
@@ -32,14 +34,11 @@ rules:
       - traefik.io
     resources:
       - "*"
-#      - namoauthclientapplicationresources
-#      - namoauthclientapplicationresources/finalizers
-#      - namoauthclientapplicationresources/status
     verbs:
-      - get
-      - list
-      - watch
       - create
       - delete
+      - get
+      - list
       - patch
       - update
+      - watch

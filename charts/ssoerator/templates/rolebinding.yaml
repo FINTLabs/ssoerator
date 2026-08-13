@@ -1,0 +1,16 @@
+{{- if .Values.serviceAccount.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "ssoerator.fullname" . }}-view
+  labels:
+    {{- include "ssoerator.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "ssoerator.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace | quote }}
+{{- end }}

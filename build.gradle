@@ -48,15 +48,31 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+def crdChartTemplatesDir = "$projectDir/charts/ssoerator-crd/charts/crds/templates"
+
 tasks.register('copyResourceDefinition', Copy) {
 	from "$buildDir/classes/java/main/META-INF/fabric8/flaisssoes.fintlabs.no-v1.yml"
-	into "$projectDir/kustomize/base"
+	into crdChartTemplatesDir
+	doLast {
+		fileTree(crdChartTemplatesDir).matching {
+			include '*.yaml', '*.yml'
+		}.each { crdFile ->
+			def content = crdFile.getText('UTF-8')
+			if (!content.contains('{{- with .Values.annotations }}')) {
+				content = content.replaceFirst(
+						/(?m)^(metadata:\s*\R(?:[ \t].*\R)*?)(?=^spec:)/,
+						'$1  annotations:\n{{- with .Values.annotations }}\n{{- toYaml . | nindent 4 }}\n{{- end }}\n'
+				)
+				crdFile.write(content, 'UTF-8')
+			}
+		}
+	}
 }
 
 tasks.named("build") { finalizedBy("copyResourceDefinition") }
 
 tasks.named("clean") {
 	doLast {
-		project.delete("$projectDir/kustomize/base/flaisssoes.fintlabs.no-v1.yml")
+		project.delete("$crdChartTemplatesDir/flaisssoes.fintlabs.no-v1.yml")
 	}
 }

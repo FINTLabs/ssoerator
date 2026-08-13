@@ -1,0 +1,67 @@
+# Default values for ssoerator.
+
+image:
+  repository: ghcr.io/fintlabs/ssoerator
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+
+commonLabels:
+  app.kubernetes.io/component: operator
+  app.kubernetes.io/part-of: fintlabs-application-infrastructure-services
+  fintlabs.no/org-id: flais.io
+  fintlabs.no/team: flais
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/path: /actuator/prometheus
+  prometheus.io/port: "8080"
+  prometheus.io/scrape: "true"
+podLabels: {}
+
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: http
+
+onePassword:
+  enabled: true
+  itemPath: ""
+
+secret:
+  name: ""
+
+env:
+  - name: logging.level.no.fintlabs
+    value: DEBUG
+
+config:
+  environment: ""
+  testEnvironment: ""
+  middlewareImage: ""
+
+extraEnvFrom: []
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+volumes: []
+volumeMounts: []
