@@ -1,0 +1,8 @@
+config:
+  environment: api
+  testEnvironment: "false"
+  middlewareImage: ghcr.io/fintlabs/flais-auth-forward-service:sha-ee1db52
+
+onePassword:
+  enabled: true
+  itemPath: vaults/aks-api-vault/items/ssoerator

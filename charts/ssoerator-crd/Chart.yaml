@@ -1,0 +1,10 @@
+apiVersion: v2
+name: ssoerator-crd
+description: A Helm chart for SSOerator CRDs
+sources:
+  - https://github.com/FINTLabs/ssoerator/tree/main/charts/ssoerator-crd
+type: application
+version: 0.1.0
+dependencies:
+  - name: crds
+    version: "0.0.0"

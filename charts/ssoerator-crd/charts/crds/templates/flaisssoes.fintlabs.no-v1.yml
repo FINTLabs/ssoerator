@@ -3,6 +3,10 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: flaisssoes.fintlabs.no
+  annotations:
+{{- with .Values.annotations }}
+{{- toYaml . | nindent 4 }}
+{{- end }}
 spec:
   group: fintlabs.no
   names:
